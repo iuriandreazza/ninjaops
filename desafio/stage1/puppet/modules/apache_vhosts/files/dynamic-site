@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName dynamic-site
+
+    DocumentRoot /var/www/dynamic-site/public
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+        <Directory /var/www/dynamic-site/public>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/dynamic-site-error.log
+
+    LogLevel warn
+
+    CustomLog ${APACHE_LOG_DIR}/dynamic-site-access.log combined
+</VirtualHost>

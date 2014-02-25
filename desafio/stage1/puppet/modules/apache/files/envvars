@@ -1,0 +1,32 @@
+# envvars - default environment variables for apache2ctl
+
+unset HOME
+
+# for supporting multiple apache2 instances
+if [ "${APACHE_CONFDIR##/etc/apache2-}" != "${APACHE_CONFDIR}" ] ; then
+	SUFFIX="-${APACHE_CONFDIR##/etc/apache2-}"
+else
+	SUFFIX=
+fi
+
+## Some enviroment setup for apache because there is no sane way to configure all, then it will be passed 
+## with apache2ctl
+# /etc/init.d/apache2, /etc/logrotate.d/apache2, etc.
+export APACHE_RUN_USER=www-data
+export APACHE_RUN_GROUP=www-data
+export APACHE_PID_FILE=/var/run/apache2$SUFFIX.pid
+export APACHE_RUN_DIR=/var/run/apache2$SUFFIX
+export APACHE_LOCK_DIR=/var/lock/apache2$SUFFIX
+export APACHE_LOG_DIR=/var/log/apache2$SUFFIX
+
+export LANG=C
+## Defaul System
+#. /etc/default/locale
+
+export LANG
+
+#export APACHE_LYNX='www-browser -dump'
+
+## default is 8192:
+## Is you need increase the limit for a file limit descriptor
+#APACHE_ULIMIT_MAX_FILES='ulimit -n 65536'

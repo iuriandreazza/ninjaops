@@ -1,0 +1,32 @@
+# Stage 1 - Build a Custom Server with Apache
+#
+# Single BOX with Apache 2.4
+# Autor - Iuri Andreazza
+
+#box	 = 'centos64'
+#url	 = 'http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box'
+box      = 'precise32'
+url      = 'http://files.vagrantup.com/precise32.box'
+hostname = 'desafio_stage1'
+domain	 = 'ninjadojo.com'
+ip	 = '192.168.0.99'
+ram	 = '256'
+
+Vagrant::Config.run do |config|
+  config.vm.box = box
+  config.vm.box_url = url
+  config.vm.host_name = hostname + '.' + domain
+  config.vm.network :hostonly, ip
+
+  config.vm.customize [
+    'modifyvm', :id,
+    '--name', hostname,
+    '--memory', ram
+  ]
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = 'puppet/manifests'
+    puppet.manifest_file = 'httpd.pp'
+    puppet.module_path = 'puppet/modules'
+  end
+end
