@@ -3,8 +3,6 @@
 # Single BOX with Apache 2.4
 # Autor - Iuri Andreazza
 
-#box	 = 'centos64'
-#url	 = 'http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box'
 box      = 'precise32'
 url      = 'http://files.vagrantup.com/precise32.box'
 hostname = 'desafio_stage1'
